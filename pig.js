@@ -51,7 +51,7 @@ async function computerTurn() {
 
 async function rollDie(initialRoll = false, isPlayer = true) {
     try {
-        const response = await fetch('https://dice-roller-node-js-gadwcxeyhua8ekhb.centralus-01.azurewebsites.net/')
+        const response = await fetch('https://dice-roller-node-js-gadwcxeyhua8ekhb.centralus-01.azurewebsites.net/roll-dice')
         const data = await response.json()
         let roll = data.roll
         if (initialRoll) {
