@@ -8,9 +8,18 @@ let scores = { // object that initializes scores
 };
 
 async function onLoadRoll() {
+    await wakeUpServer()
     scores.playerCurrentScore = await rollDie(true);
     scores.playerRoll = scores.playerCurrentScore;
     updateScores();
+}
+
+async function wakeUpServer() {
+    try {
+        await fetch('https://dice-roller-node-js-gadwcxeyhua8ekhb.centralus-01.azurewebsites.net/roll-result', { method: 'GET' });
+    } catch (error) {
+        console.error("Error waking up server:", error);
+    }
 }
 
 async function playerTurn() {
