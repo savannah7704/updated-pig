@@ -1,0 +1,26 @@
+h1, h2, p {
+    text-align: center;
+    color: #ff5cc8;
+    margin-left: 300px;
+    margin-right: 300px
+}
+
+img {
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin: auto;
+    margin-bottom: 0px;
+}
+
+button {
+    display: block;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.right-justified {
+    display: inline-block;
+    width: 10px;
+    text-align: right;
+}

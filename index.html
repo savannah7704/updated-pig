@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pig</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+
+    <body onload="onLoadRoll()">
+
+        <h1>PIG</h1>
+        <img src="pig.png" alt="Pig">
+        <h2>Instructions</h2>
+        <p>You and the computer will take turns rolling a die. You can either roll or hold by pressing the corresponding buttons. You can roll as many times as you want
+            and add up the points. Your turn ends when you hold or if you roll a 1. If you roll a 1, you will lose any points you gained during that round. The first
+            player to reach 100 points wins!
+        </p>
+        <div>
+            <p>Your roll: <span id="your-roll" class="right-justified"></span></p>
+            <p>Your current turn's score: <span id="your-current-score" class="right-justified"></span></p>
+            <p>Your total score: <span id="your-total-score" class="right-justified"></span></p>
+            <p>Computer's roll: <span id="computer-roll" class="right-justified"></span></p>
+            <p>Computer's current score: <span id="computer-current-score" class="right-justified"></span></p>
+            <p>Computer's total score: <span id="computer-total-score" class="right-justified"></span></p>
+        </div>
+        <script src="pig.js"></script>
+        <button id="roll" type="button" onclick="playerTurn()" autofocus>Roll die</button>
+        <button id="hold" type="button" onclick="hold()">Hold</button>
+        <button type="button" onclick="reset()">Reset game</button>
+
+
+    </body>
+
+</html>
