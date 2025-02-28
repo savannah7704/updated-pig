@@ -16,7 +16,7 @@ async function onLoadRoll() {
 
 async function wakeUpServer() {
     try {
-        await fetch('https://node-and-express-on-azure-template-ss-c7dufvgra7gbgte9.centralus-01.azurewebsites.net/roll', { method: 'GET' });
+        await fetch('https://server-dice-roller-node-js-ss-e9fra8g7bnbxe0aa.centralus-01.azurewebsites.net/roll', { method: 'GET' });
     } catch (error) {
         console.error("Error waking up server:", error);
     }
@@ -60,7 +60,7 @@ async function computerTurn() {
 
 async function rollDie(initialRoll = false, isPlayer = true) {
     try {
-        const response = await fetch('https://node-and-express-on-azure-template-ss-c7dufvgra7gbgte9.centralus-01.azurewebsites.net/roll');
+        const response = await fetch('https://server-dice-roller-node-js-ss-e9fra8g7bnbxe0aa.centralus-01.azurewebsites.net/roll');
         const data = await response.json();
         const roll = data.roll;
 
