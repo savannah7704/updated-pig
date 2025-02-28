@@ -5,105 +5,105 @@ let scores = { // object that initializes scores
     compRoll: 0,
     compTotalScore: 0,
     compCurrentScore: 0,
-}
+};
 
 async function onLoadRoll() {
-    scores.playerCurrentScore = await rollDie(true)
-    scores.playerRoll = scores.playerCurrentScore
-    updateScores()
+    scores.playerCurrentScore = await rollDie(true);
+    scores.playerRoll = scores.playerCurrentScore;
+    updateScores();
 }
 
 async function playerTurn() {
-    const roll = await rollDie()
-    if (roll == 1) {
-        scores.playerCurrentScore = 0
-        updateScores()
-        disablePlayerButtons()
-        computerTurn()
+    const roll = await rollDie();
+    if (roll === 1) {
+        scores.playerCurrentScore = 0;
+        updateScores();
+        disablePlayerButtons();
+        computerTurn();
     } else {
-        scores.playerCurrentScore += roll
-        updateScores()
+        scores.playerCurrentScore += roll;
+        updateScores();
     }
 }
 
 async function computerTurn() {
-    let choice = Math.floor(Math.random() * 5)
-    while (choice != 0) {
-        const roll = await rollDie(false, false)
-        if (roll == 1) {
-            scores.compCurrentScore = 0
-            updateScores()
-            enablePlayerButtons()
-            return
+    let choice = Math.floor(Math.random() * 5);
+    while (choice !== 0) {
+        const roll = await rollDie(false, false);
+        if (roll === 1) {
+            scores.compCurrentScore = 0;
+            updateScores();
+            enablePlayerButtons();
+            return;
         } else {
-            scores.compCurrentScore += roll
-            updateScores()
+            scores.compCurrentScore += roll;
+            updateScores();
         }
-        choice = Math.floor(Math.random() * 5)
+        choice = Math.floor(Math.random() * 5);
     }
 
-    scores.compTotalScore += scores.compCurrentScore
-    scores.compCurrentScore = 0
-    updateScores()
-    checkWinner()
-    enablePlayerButtons()
+    scores.compTotalScore += scores.compCurrentScore;
+    scores.compCurrentScore = 0;
+    updateScores();
+    checkWinner();
+    enablePlayerButtons();
 }
 
 async function rollDie(initialRoll = false, isPlayer = true) {
     try {
-        const response = await fetch('https://dice-roller-node-js-gadwcxeyhua8ekhb.centralus-01.azurewebsites.net/roll-die')
-        const data = await response.json()
-        let roll = data.roll
+        const response = await fetch('https://dice-roller-node-js-gadwcxeyhua8ekhb.centralus-01.azurewebsites.net/roll-die');
+        const data = await response.json();
+        const roll = data.roll;
+
         if (initialRoll) {
-            return roll
+            return roll;
         } else {
-            if (roll == 1) {
+            if (roll === 1) {
                 if (isPlayer) {
-                    scores.compCurrentScore = 0
-                    scores.playerRoll = roll
-                    updateScores()
+                    scores.playerCurrentScore = 0;
+                    scores.playerRoll = roll;
+                    updateScores();
                 } else {
-                    scores.compCurrentScore = 0
-                    scores.compRoll = roll
-                    updateScores()
+                    scores.compCurrentScore = 0;
+                    scores.compRoll = roll;
+                    updateScores();
                 }
             } else {
                 if (isPlayer) {
-                    scores.playerCurrentScore += roll
-                    scores.playerRoll = roll
-                    updateScores()
+                    scores.playerCurrentScore += roll;
+                    scores.playerRoll = roll;
+                    updateScores();
                 } else {
-                    scores.compCurrentScore += roll
-                    scores.compRoll = roll
-                    updateScores()
+                    scores.compCurrentScore += roll;
+                    scores.compRoll = roll;
+                    updateScores();
                 }
             }
+            return roll;
         }
-        return roll 
     } catch (error) {
-        console.error('Error: ', error)
-        return 1 //fallback in case of error
+        console.error('Error:', error);
+        return 1; // Fallback value in case of error
     }
 }
 
 async function hold() {
-    scores.playerTotalScore += scores.playerCurrentScore
-    scores.playerCurrentScore = 0
-    updateScores()
-    checkWinner()
-    disablePlayerButtons()
-    computerTurn()
+    scores.playerTotalScore += scores.playerCurrentScore;
+    scores.playerCurrentScore = 0;
+    updateScores();
+    checkWinner();
+    disablePlayerButtons();
+    computerTurn();
 }
 
 function checkWinner() {
-    if(scores.playerTotalScore >= 100){
+    if (scores.playerTotalScore >= 100) {
         alert("YOU WIN!!!!!");
         reset();
-    } else if (scores.compTotalScore >= 100){
+    } else if (scores.compTotalScore >= 100) {
         alert("Sorry, YOU LOSE!!!!!");
         reset();
     }
-
 }
 
 function disablePlayerButtons() {
@@ -125,7 +125,7 @@ function updateScores() {
     document.getElementById("computer-total-score").innerText = scores.compTotalScore;
 }
 
-function reset() { //resets the game
+function reset() {
     scores = {
         playerRoll: 0,
         playerTotalScore: 0,
@@ -133,7 +133,7 @@ function reset() { //resets the game
         compRoll: 0,
         compTotalScore: 0,
         compCurrentScore: 0,
-    }
+    };
     updateScores();
     enablePlayerButtons();
 }
